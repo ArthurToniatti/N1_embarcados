@@ -13,7 +13,7 @@ DASH_HOST = "0.0.0.0"  # Set this to "0.0.0.0" to allow access from any IP
 
 # Function to get data from the API
 def get_data(attribute, lastN):
-    url = f"http://{IP_ADDRESS}:{PORT_STH}/STH/v1/contextEntities/type/Lamp/id/urn:ngsi-ld:Lamp:003x/attributes/{attribute}?lastN={lastN}"
+    url = f"http://{IP_ADDRESS}:{PORT_STH}/STH/v1/contextEntities/type/Lamp/id/urn:ngsi-ld:Lamp:003y/attributes/{attribute}?lastN={lastN}"
     headers = {
         'fiware-service': 'smart',
         'fiware-servicepath': '/'
@@ -74,9 +74,9 @@ app.layout = html.Div([
 )
 def update_data_store(n, stored_data):
     # Get data for luminosity, temperature, and humidity
-    data_luminosity = get_data('luminosity', lastN)
-    data_temperature = get_data('temperature', lastN)
-    data_humidity = get_data('humidity', lastN)
+    data_luminosity = get_data('luminosity', 5)
+    data_temperature = get_data('temperature', 5)
+    data_humidity = get_data('humidity', 5)
 
     if data_luminosity and data_temperature and data_humidity:
         # Extract values and timestamps
