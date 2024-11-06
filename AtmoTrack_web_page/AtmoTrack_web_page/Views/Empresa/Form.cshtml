@@ -1,0 +1,172 @@
+﻿@model EmpresaViewModel
+
+@{
+    ViewData["Title"] = "Cadastro de Empresas";
+}
+
+<h2 class="text-center mb-4">Cadastro de Empresas</h2>
+
+<form asp-action="Salvar">
+    <input type="hidden" value="@ViewBag.Operacao" name="Operacao" />
+    <div class="container">
+        <div class="row">
+            <!-- Id e Nome na mesma linha -->
+            <div class="col-md-3">
+                <label for="Id" class="col-form-label">Id</label>
+                @if (ViewBag.Operacao == "I")
+                {
+                    <input type="text" name="id" value="@Model.Id" class="form-control" />
+                }
+                else
+                {
+                    <input type="text" name="id" value="@Model.Id" class="form-control" readonly />
+                }
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="col-md-9">
+                <label for="RazaoSocial" class="col-form-label">RazaoSocial</label>
+                <input type="text" name="RazaoSocial" value="@Model.RazaoSocial" class="form-control" />
+                <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <!-- Email sozinho em uma linha -->
+            <div class="col-md-12">
+                <label for="NomeFantasia" class="col-form-label">NomeFantasia</label>
+                <input type="text" name="NomeFantasia" value="@Model.NomeFantasia" class="form-control" />
+                <span asp-validation-for="NomeFantasia" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="CNPJ" class="col-form-label">CNPJ</label>
+                <input type="text" id="CNPJ" name="CNPJ" value="@Model.CNPJ" class="form-control" placeholder="00.000.000/0000-00" maxlength="18" />
+                <span asp-validation-for="CNPJ" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="InscricaoEstadual" class="col-form-label">InscricaoEstadual</label>
+                <input type="text" name="InscricaoEstadual" value="@Model.InscricaoEstadual" class="form-control" />
+                <span asp-validation-for="InscricaoEstadual" class="text-danger"></span>
+            </div>
+            
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="Cep" class="col-form-label">Cep</label>
+                <input type="text" id="Cep" name="Cep" value="@Model.Cep" class="form-control" placeholder="00000-000" onblur="buscaCEP()" />
+                <span asp-validation-for="Cep" class="text-danger"></span>
+            </div>
+            <div class="col-md-7">
+                <label for="Endereco" class="col-form-label">Endereco</label>
+                <input type="text" name="Endereco" id="Endereco" value="@Model.Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label for="Numero" class="col-form-label">Número</label>
+                <input type="text" id="Numero" name="Numero" value="@Model.Numero" class="form-control"/>
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Bairro" class="col-form-label">Bairro</label>
+                <input type="text" name="Bairro" id="Bairro" value="@Model.Bairro" class="form-control" />
+                <span asp-validation-for="Bairro" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="Cidade" class="col-form-label">Cidade</label>
+                <input type="text" name="Cidade" id="Cidade" value="@Model.Cidade" class="form-control" />
+                <span asp-validation-for="Cidade" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Estado" class="col-form-label">Estado</label>
+                <input type="text" name="Estado" id="Estado" value="@Model.Estado" class="form-control" />
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label for="Uf" class="col-form-label">Uf</label>
+                <input type="text" name="Uf" id="Uf" value="@Model.Uf" class="form-control" />
+                <span asp-validation-for="Uf" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label for="Tipo" class="col-form-label">Tipo</label>
+                <input type="text" name="Tipo" value="@Model.Tipo" class="form-control" />
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <label for="Cep" class="col-form-label">WebSite</label>
+                <input type="text" name="WebSite" value="@Model.WebSite" class="form-control" placeholder="www.exemplo.com" />
+                <span asp-validation-for="WebSite" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Telefone1" class="col-form-label">Telefone 1</label>
+                <input type="text" id="Telefone" name="telefone1" value="@Model.Telefone1" class="form-control" placeholder="(00)00000-0000" />
+                <span asp-validation-for="Telefone1" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="Telefone2" class="col-form-label">Telefone 2</label>
+                <input type="text" id="Telefone" name="telefone2" value="@Model.Telefone2" class="form-control" placeholder="(00)00000-0000" />
+                <span asp-validation-for="Telefone2" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        @if (ViewBag.cadastroUsuario != "I")
+        {
+            <div class="row">
+                <!-- Data de Registro -->
+                <div class="col-md-12 ">
+                    <label for="DataRegistro" class="col-form-label">Data de Registro</label>
+                    <input type="date" name="dataRegistro" value="@Model.DataRegistro.ToString("yyyy-MM-dd")" class="form-control" />
+                    <span asp-validation-for="DataRegistro" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+        }
+
+        <!-- Botão de Submit -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <input type="submit" class="btn btn-success" value="Salvar" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    document.getElementById('Telefone').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+        value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1)$2-$3'); // Aplica a máscara
+        e.target.value = value;
+    });
+
+    document.getElementById('CNPJ').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    
+    if (value.length <= 14) { // Limita o número de caracteres a 14 (CNPJ)
+        // Aplica a máscara para o CNPJ no formato: 00.000.000/0000-00
+        value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2}).*/, '$1.$2.$3/$4-$5');
+    }
+
+    e.target.value = value;
+});
+</script>
