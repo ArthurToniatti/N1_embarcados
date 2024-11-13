@@ -7,7 +7,7 @@ from datetime import datetime
 import pytz
 
 # Constants for IP and port
-IP_ADDRESS = "20.206.144.151"
+IP_ADDRESS = "4.228.58.59"
 PORT_STH = 8666
 DASH_HOST = "0.0.0.0"  # Set this to "0.0.0.0" to allow access from any IP
 
